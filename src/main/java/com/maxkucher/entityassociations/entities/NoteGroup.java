@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,6 +21,10 @@ public class NoteGroup {
     protected Long id;
 
     protected String name;
+
+
+    @OneToMany(mappedBy = "noteGroup", fetch = FetchType.LAZY)
+    protected Set<Note> notes = new HashSet<>();
 
 
 }
