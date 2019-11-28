@@ -5,8 +5,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,11 +30,10 @@ public class Note {
 
     @ElementCollection
     @CollectionTable
-    @AttributeOverride(
-            name = "filename",
-            column = @Column(name = "FNAME", nullable = false)
-    )
-    protected Set<Image> images = new HashSet<>();
+    @CollectionId(generator = "ID_GENERATOR",
+            type = @Type(type = "long"),
+            columns = @Column(name = "IMAGE_ID"))
+    protected Collection<Image> images = new ArrayList<>();
 
 
 }
