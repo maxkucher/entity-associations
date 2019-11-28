@@ -11,8 +11,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -34,6 +32,11 @@ public class Note {
             type = @Type(type = "long"),
             columns = @Column(name = "IMAGE_ID"))
     protected Collection<Image> images = new ArrayList<>();
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NOTE_GROUP_ID", nullable = false)
+    protected NoteGroup noteGroup;
 
 
 }
