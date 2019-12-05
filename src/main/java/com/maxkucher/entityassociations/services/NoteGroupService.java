@@ -27,11 +27,10 @@ public class NoteGroupService {
             Note note = new Note();
             note.setImages(noteDto.getImages());
             note.setContent(noteDto.getContent());
-            NotePreferences notePreferences = new NotePreferences(
-                    noteDto.getNotePreferences().getColor(),
-                    noteDto.getNotePreferences().getFontSize(),
-                    note
-            );
+            NotePreferences notePreferences = NotePreferences.builder()
+                    .color(noteDto.getNotePreferences().getColor())
+                    .fontSize(noteDto.getNotePreferences().getFontSize())
+                    .build();
             note.setPreferences(notePreferences);
             //FIXME stackoverflow
             // note.setNoteGroup(noteGroup);

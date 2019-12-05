@@ -9,35 +9,30 @@ import javax.validation.constraints.Positive;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NotePreferences {
 
-    private static final String GENERATOR_NAME = "notePreferencesKeyGenerator";
 
     @Id
-    @GeneratedValue(generator = NotePreferences.GENERATOR_NAME)
-    @GenericGenerator(
-            name = NotePreferences.GENERATOR_NAME,
-            strategy = "foreign",
-            parameters = @org.hibernate.annotations.Parameter(
-                    name = "property", value = "note"
-            )
-    )
+    @GeneratedValue(generator = "ID_GENERATOR")
     private Long id;
 
-    @NonNull
     protected NoteColor color;
 
     @Positive
-    @NonNull
     protected short fontSize;
 
     @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST,
             optional = false)
+    @JoinTable(name = "NOTE_NOTE_PREFERENCES",
+            joinColumns = @JoinColumn(name = "PREFERENCE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "NOTE_ID",
+                    unique = true,
+                    nullable = false))
     @JsonBackReference
-    @PrimaryKeyJoinColumn
-    @NonNull
     protected Note note;
 
 
