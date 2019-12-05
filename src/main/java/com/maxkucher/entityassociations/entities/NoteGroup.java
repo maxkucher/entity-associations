@@ -22,11 +22,8 @@ public class NoteGroup {
 
     protected String name;
 
-
     @OneToMany(mappedBy = "noteGroup",
-            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     protected Set<Note> notes = new HashSet<>();
-
 
 }

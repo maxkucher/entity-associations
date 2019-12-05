@@ -1,10 +1,7 @@
 package com.maxkucher.entityassociations.entities;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Type;
 
@@ -17,6 +14,7 @@ import java.util.Collection;
 @Setter
 @EqualsAndHashCode
 @ToString
+@NoArgsConstructor
 public class Note {
 
     @Id
@@ -34,9 +32,13 @@ public class Note {
     protected Collection<Image> images = new ArrayList<>();
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "NOTE_GROUP_ID", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "NOTE_GROUP_ID")
     protected NoteGroup noteGroup;
+
+
+    @OneToOne(mappedBy = "note", cascade = CascadeType.PERSIST)
+    protected NotePreferences preferences;
 
 
 }
