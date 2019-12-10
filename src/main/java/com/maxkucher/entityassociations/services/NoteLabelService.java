@@ -27,7 +27,6 @@ public class NoteLabelService {
         NoteLabel noteLabel = NoteLabel.builder()
                 .labelName(dto.getLabelName())
                 .build();
-
         for (NoteDto noteDto : dto.getNotes()) {
             Note note = new Note(noteDto);
             note.getNoteLabels().add(noteLabel);
