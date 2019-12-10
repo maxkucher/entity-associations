@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -27,13 +28,15 @@ public class NoteGroupService {
             Note note = new Note();
             note.setImages(noteDto.getImages());
             note.setContent(noteDto.getContent());
-            NotePreferences notePreferences = NotePreferences.builder()
-                    .color(noteDto.getNotePreferences().getColor())
-                    .fontSize(noteDto.getNotePreferences().getFontSize())
-                    .build();
-            note.setPreferences(notePreferences);
+            if (Objects.nonNull(noteDto.getNotePreferences())) {
+                NotePreferences notePreferences = NotePreferences.builder()
+                        .color(noteDto.getNotePreferences().getColor())
+                        .fontSize(noteDto.getNotePreferences().getFontSize())
+                        .build();
+                note.setPreferences(notePreferences);
+            }
             //FIXME stackoverflow
-            // note.setNoteGroup(noteGroup);
+            note.setNoteGroup(noteGroup);
             notes.add(note);
         }
         noteGroup.getNotes().addAll(notes);

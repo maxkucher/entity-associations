@@ -1,6 +1,7 @@
 package com.maxkucher.entityassociations.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Type;
@@ -12,7 +13,6 @@ import java.util.Collection;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 public class Note {
@@ -33,7 +33,12 @@ public class Note {
 
 
     @ManyToOne
-    @JoinColumn(name = "NOTE_GROUP_ID")
+    @JoinTable(
+            name = "NOTE_NOTE_GROUP",
+            joinColumns = @JoinColumn(name = "NOTE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "NOTE_GROUP_ID")
+    )
+    @JsonBackReference
     protected NoteGroup noteGroup;
 
 

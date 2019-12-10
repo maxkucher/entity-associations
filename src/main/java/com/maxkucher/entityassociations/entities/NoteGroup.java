@@ -1,7 +1,7 @@
 package com.maxkucher.entityassociations.entities;
 
 
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +13,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString
 public class NoteGroup {
     @Id

@@ -1,6 +1,7 @@
 package com.maxkucher.entityassociations.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.maxkucher.entityassociations.entities.Image;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class NoteDto {
 
     private Collection<Image> images = new ArrayList<>();
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private NotePreferencesDto notePreferences;
 
 }
