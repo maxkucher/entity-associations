@@ -9,6 +9,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -44,6 +46,10 @@ public class Note {
 
     @OneToOne(mappedBy = "note", cascade = CascadeType.PERSIST)
     protected NotePreferences preferences;
+
+
+    @ManyToMany(mappedBy = "notes")
+    protected Set<NoteLabel> noteLabels = new HashSet<>();
 
 
 }
