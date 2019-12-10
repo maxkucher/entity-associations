@@ -1,6 +1,7 @@
 package com.maxkucher.entityassociations.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,10 +27,8 @@ public class NoteLabel {
             joinColumns = @JoinColumn(name = "NOTE_GROUP_ID"),
             inverseJoinColumns = @JoinColumn(name = "NOTE_ID")
     )
+    @JsonBackReference
     protected Set<Note> notes = new HashSet<>();
-
-
-
 
 
 }
