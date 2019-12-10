@@ -21,16 +21,8 @@ public class NotesService {
     }
 
     public Note createNote(NoteDto noteDto) {
-        Note note = new Note();
-        note.setContent(noteDto.getContent());
-        note.setImages(noteDto.getImages());
+        Note note = new Note(noteDto);
 
-        NotePreferences notePreferences = NotePreferences.builder()
-                .color(noteDto.getNotePreferences().getColor())
-                .fontSize(noteDto.getNotePreferences().getFontSize())
-                .note(note)
-                .build();
-        note.setPreferences(notePreferences);
         return notesRepository.save(note);
     }
 }

@@ -2,6 +2,7 @@ package com.maxkucher.entityassociations.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Builder
 public class NoteLabel {
     @Id
     @GeneratedValue(generator = "ID_GENERATOR")

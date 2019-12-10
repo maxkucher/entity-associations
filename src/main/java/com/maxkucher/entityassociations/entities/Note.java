@@ -2,6 +2,7 @@ package com.maxkucher.entityassociations.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.maxkucher.entityassociations.dto.NoteDto;
 import lombok.*;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Type;
@@ -17,6 +18,7 @@ import java.util.Set;
 @Setter
 @ToString
 @NoArgsConstructor
+@Builder
 public class Note {
 
     @Id
@@ -50,6 +52,19 @@ public class Note {
 
     @ManyToMany(mappedBy = "notes")
     protected Set<NoteLabel> noteLabels = new HashSet<>();
+
+
+    public Note(NoteDto dto) {
+        Note note = new Note();
+        note.setContent(dto.getContent());
+        note.setImages(dto.getImages());
+        if (dto.getNotePreferences() != null) {
+            NotePreferences notePreferences = new NotePreferences(dto.getNotePreferences());
+            notePreferences.setNote(note);
+            note.setPreferences(notePreferences);
+        }
+
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.maxkucher.entityassociations.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.maxkucher.entityassociations.dto.NotePreferencesDto;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -34,6 +35,14 @@ public class NotePreferences {
                     nullable = false))
     @JsonBackReference
     protected Note note;
+
+
+    public NotePreferences(NotePreferencesDto dto) {
+        NotePreferences notePreferences = NotePreferences.builder()
+                .color(dto.getColor())
+                .fontSize(dto.getFontSize())
+                .build();
+    }
 
 
 }
